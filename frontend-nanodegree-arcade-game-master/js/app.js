@@ -41,7 +41,7 @@ Enemy.prototype.render = function () {
 
 let Player = function () {
 
-    this.x = 200; // center of x
+    this.x = 200; 
     this.y = 430;
     this.sprite = 'images/char-pink-girl.png';
 }
@@ -59,8 +59,13 @@ Player.prototype.render = function () {
 
 //handle input
 Player.prototype.handleInput = function (dir) {
-
-    if (dir == 'left' && this.x > 90)
+    
+      // reset when player reach river 
+      if (player.y <= 0) {
+        player.x = 200;
+        player.y = 430;}
+    
+   if (dir == 'left' && this.x > 90)
         this.x = this.x - 100;
 
     else if (dir == 'right' && this.x < 400)
@@ -71,17 +76,15 @@ Player.prototype.handleInput = function (dir) {
 
     else if (dir == 'down' && this.y < 400)
         this.y = this.y + 83;
+
+     
+
 };
 
 
 var checkCollision = function (enemy2) {
     if (player.y + 131 >= enemy2.y + 90 && player.x + 25 <= enemy2.x + 88 && player.y + 73 <= enemy2.y + 135 && player.x + 76 >= enemy2.x + 11) {
         // reset player posistion
-        player.x = 200;
-        player.y = 430;
-    }
-
-    if (player.y <= 0) {
         player.x = 200;
         player.y = 430;
     }
